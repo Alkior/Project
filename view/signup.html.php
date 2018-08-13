@@ -1,4 +1,4 @@
-	<br><hr>
+	<br><hr><h1>Регистрация пользователя</h1>
 	<form method="post">
 		<p>
 			<p><strong>Your login</strong></p>
@@ -20,6 +20,6 @@
 			<input type="password" name="password_2">
 
 		</p>
-		<button type="submit" name="do_signup">Register now</button>
+		<button type="submit" name="do_signup">Регистрация</button>
 	</form><br><hr>
 	<a href="index.php">Back</a>
