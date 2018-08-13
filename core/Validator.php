@@ -54,8 +54,8 @@ class Validator
 			if ($k == 'max_length') {
                 foreach ($this->fields as $name => $value) {
                     if (in_array($name, $rule)) {
-                        if ($value > 20 || $value === null) {
-                            $this->errors[$name] = $this->trans->getTranslate('field.error_empty', 'ru');
+                        if (strlen($value) > 20) {
+                            $this->errors[$name] = $this->trans->getTranslate('field.error_max', 'ru');
                         }
                     }
                 }

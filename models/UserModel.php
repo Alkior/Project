@@ -39,9 +39,9 @@ class UserModel extends BaseModel
         }
     }
 
-    public function newUser($login, $password, $email)
+    public function addUser($login, $email, $password)
     {			
-		$object = ['login' => $login, 'password'=> $password, 'email' => $email];
+		$object = ['login' => $login, 'email' => $email, 'password' => $password];
 		$res = SQL::Instance();
 		$article = $res->instance($this->table, $object);
 
@@ -71,11 +71,16 @@ class UserModel extends BaseModel
     */
     public function delUser($id, $login, $password)
     {
-    	$query = $this->db->prepare("DELETE FROM {$this->table} WHERE {$this->pk} = '$id', login = '$login', password = '$password'");
+    	$res = $this->db->query("DELETE FROM {$this->table} WHERE {$this->pk} = '$id', login = '$login', password = '$password'");
         $query->execute();
         if(!$res){
 			DBerror::db_error_log($query);
 		}    
     	return $query->fetch();
+    }
+
+    public function getLogin($login)
+    {
+        $res = $this->db->query("SELECT * FROM {$this->table} WHERE login = '$login'");
     }
 }

@@ -83,8 +83,7 @@ class ArticleModel extends BaseModel
   
             $object = ['title' => $title,'content'=> $content];
             $res = SQL::Instance();
-            $article = $res->insert($this->table, $object);            
-            
+            $article = $res->insert($this->table, $object);
             if(!$res){
                 return false;           
             }

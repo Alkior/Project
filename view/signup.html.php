@@ -2,12 +2,12 @@
 	<form method="post">
 		<p>
 			<p><strong>Your login</strong></p>
-			<input type="text" name="login" value="<?=$user['login']?>">
+			<input type="text" name="login" value="<?=$validator->fields['login']?>">
 
 		</p>
 		<p>
 			<p><strong>Your email</strong></p>
-			<input type="email" name="email" value="<?=$user['email']?>">
+			<input type="email" name="email" value="<?=$validator->fields['email']?>">
 
 		</p>
 		<p>
@@ -22,4 +22,4 @@
 		</p>
 		<button type="submit" name="do_signup">Регистрация!</button>
 	</form><br><hr>
-	<a href="index.php">Back</a>
+	<a href="/">Back</a>

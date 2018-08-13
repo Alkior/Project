@@ -2,7 +2,6 @@
 
 namespace Core;
 
-use core\DBerror;
 include_once('settings.php');
 
 class SQL{
@@ -50,13 +49,13 @@ class SQL{
 				$object[$key] = 'NULL';
 			}
 		}
+
 		//  title,content
 		$columns_s = implode(',', $columns);
 		//  :title,:content
 		$masks_s = implode(',', $masks);
 		// INSERT INTO article (title,content) VALUES(:title,:content)
 		$query = "INSERT INTO $table ($columns_s) VALUES ($masks_s)";
-		
 		$q = $this->db->prepare($query);
 		$q->execute($object);
 		

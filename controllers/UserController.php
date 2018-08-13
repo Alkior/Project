@@ -3,29 +3,31 @@
 namespace Controllers;
 
 use Core\Validator;
-use Models\UserModel;
+use models\UserModel;
 use core\RND;
 use core\Request;
+use core\SQL;
 
 class UserController extends BaseController
 {
 	public function loginAction()
 	{
 		$validator = new Validator();
-		$validator->loadRules('login_form');
+		$mUser = UserModel::Instance();
+
 
 		if ($this->request->isPost()) {
-
-			$validator->run($this->request->getPost());
-			
+            $validator->loadRules('login_form');
+            $validator->run($this->request->getPost());
+            $authForm = $mUser->authUser($validator->fields['login'], password_hash($validator->fields['password'], PASSWORD_DEFAULT));
 			if ($validator->isValid) {
-				if ($validator->fields['login'] == 'admin' && $validator->fields['password'] == 'qwerty') {
+				if ($authForm) {
             		$_SESSION['auth'] = true;
 
 	            	// если стоит галочка                       
 		            if (isset($this->request->getPost()['remember'])) {
-		                setcookie('login', $login, time()+3600*24*7, '/');
-		                setcookie('password', md5($password), time()+3600*24*7, '/');
+		                setcookie('login', $validator->fields['login'], time()+3600*24*7, '/');
+		                setcookie('password', password_hash($validator->fields['password'], PASSWORD_DEFAULT), time()+3600*24*7, '/');
 		            }
 
 					// Проверяем, что есть отметка, откуда мы пришли и перенаправляем туда
@@ -60,20 +62,26 @@ class UserController extends BaseController
     {
         $mUser = UserModel::Instance();
         $validator = new Validator();
-        $validator->loadRules('signup_form');
+
+        if ($this->request->isPost()) {
+            $validator->loadRules('signup_form');
+            $validator->run($this->request->getPost());
+
+            $mUser->addUser($validator->fields['login'], $validator->fields['email'], password_hash($validator->fields['password'], PASSWORD_DEFAULT));
+            $this->getRedirect('/login');
 
 
-        if($this->request->isPost())
-        {
-
-                $user = $mUser->newUser(htmlspecialchars($this->request->getPost()['login']), htmlspecialchars($this->request->getPost()['password']), htmlspecialchars($this->request->getPost()['email']));
-                $this->getRedirect('/login');
         }
         $this->content = RND::render('view/signup.html.php', [
-            'user' => $user,
+            'user' => $validator->fields['login'],
+            'email' => $validator->fields['email'],
+            'password' => $validator->fields['password'],
             'errors' => $validator->errors,
         ]);
         $this->title = 'Регистрация';
+
     }
+
+
 
 }
