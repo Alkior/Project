@@ -20,6 +20,6 @@
 			<input type="password" name="password_2">
 
 		</p>
-		<button type="submit" name="do_signup">Регистрация</button>
+		<button type="submit" name="do_signup">Регистрация!</button>
 	</form><br><hr>
 	<a href="index.php">Back</a>
