@@ -65,14 +65,9 @@ class UserController extends BaseController
 
         if($this->request->isPost())
         {
-            //$validator->run($this->request->getPost());
-
-
-          //  if($validator->isValid){
 
                 $user = $mUser->newUser(htmlspecialchars($this->request->getPost()['login']), htmlspecialchars($this->request->getPost()['password']), htmlspecialchars($this->request->getPost()['email']));
                 $this->getRedirect('/login');
-           // }
         }
         $this->content = RND::render('view/signup.html.php', [
             'user' => $user,
