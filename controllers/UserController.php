@@ -15,13 +15,12 @@ class UserController extends BaseController
 		$validator = new Validator();
 		$mUser = UserModel::Instance();
 
-
 		if ($this->request->isPost()) {
             $validator->loadRules('login_form');
             $validator->run($this->request->getPost());
-            $authForm = $mUser->authUser($validator->fields['login'], password_hash($validator->fields['password'], PASSWORD_DEFAULT));
+            $auth = password_verify($validator->fields['password'], $mUser->getPass($validator->fields['login'])['password']);
 			if ($validator->isValid) {
-				if ($authForm) {
+				if ($auth == true) {
             		$_SESSION['auth'] = true;
 
 	            	// если стоит галочка                       

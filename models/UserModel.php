@@ -39,13 +39,20 @@ class UserModel extends BaseModel
         }
     }
 
-    public function addUser($login, $email, $password)
-    {			
+    public function addUser($login, $email, $password) //!!!Костыль, понять почему через SQL не регает.
+    {	/*
 		$object = ['login' => $login, 'email' => $email, 'password' => $password];
 		$res = SQL::Instance();
-		$article = $res->instance($this->table, $object);
+		$article = $res->instance($this->table, $object);*/
+        $res = SQL::Instance();
+        $mask = ['login' => $login, 'email' => $email, 'password' => $password];
+        $query = $res->db->prepare("INSERT INTO {$this->table} (login, email, password) VALUE (:login, :email, :password)");
+        $query->execute($mask);
+        $article = $res->db->lastInsertId();
 
-		if(!$res){
+
+		if(!$query){
+            DBerror::db_error_log($query);
             return false;
         }
         else{
@@ -54,7 +61,18 @@ class UserModel extends BaseModel
     }
     /**
     *
-    */    
+    */
+
+    public function getPass($login)
+    {
+        $res = $this->db->query("SELECT * FROM {$this->table} WHERE login = '$login'");
+        if(!$res){
+            return false;
+        }
+        else{
+            return $res[0];
+        }
+    }
     
     public function updatePassword($login, $password, $id)
     {

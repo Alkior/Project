@@ -6,7 +6,7 @@ include_once('settings.php');
 
 class SQL{
 	private static $instance;
-	private $db;
+	public $db;
 	
 	public static function Instance(){
 		if(self::$instance == null){
