@@ -2,7 +2,8 @@
 
 namespace Models;
 
-use core\SQL; 
+use core\SQL;
+
 
 class ArticleModel extends BaseModel
 {  
@@ -25,7 +26,8 @@ class ArticleModel extends BaseModel
         parent::__construct();
         $this->table = 'blogs';
         $this->pk = 'id_blog'; 
-        $this->dt = 'dtpost';       
+        $this->dt = 'dtpost';
+
     }  
          
     /**
@@ -148,5 +150,6 @@ class ArticleModel extends BaseModel
         }
         return $errors;
     }
-    
+
+
 }

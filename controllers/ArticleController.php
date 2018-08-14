@@ -6,6 +6,7 @@ use Models\ArticleModel;
 use core\RND;
 use core\Request;
 use Core\Validator;
+use core\Users;
 
 class ArticleController extends BaseController
 {
@@ -28,7 +29,10 @@ class ArticleController extends BaseController
 	}
 
 	public function oneAction()
-	{	
+	{
+	    if(!Users::isAuth()){
+	        $this->getRedirect('/');
+        }
 		if(!isset($this->request->getGet()['id_blog'])){
 			$this->Page404();
 		}	
@@ -49,6 +53,9 @@ class ArticleController extends BaseController
 
 	public function addAction()
 	{
+        if(!Users::isAuth()){
+            $this->getRedirect('/');
+        }
 
 		$mArticle = ArticleModel::Instance();
 				
@@ -71,6 +78,9 @@ class ArticleController extends BaseController
 
 	public function editAction()
 	{
+        if(!Users::isAuth()){
+            $this->getRedirect('/');
+        }
 		if(!isset($this->request->getGet()['id_blog'])){
 			$this->Page404();
 		}
@@ -105,6 +115,7 @@ class ArticleController extends BaseController
 
 	public function delAction()
 	{
+	    
 		$mArticle = ArticleModel::Instance();
 		$article = $mArticle->del($this->request->getGet()['id_blog']);
 		if(!empty($article)){

@@ -16,3 +16,63 @@
 ----------------------------------------
 |2018-08-02 16:16:55|23000|1062|Duplicate entry 'Юхаху' for key 'title'
 ----------------------------------------
+|2018-08-14 16:18:16|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:18:24|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:19:28|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:21:20|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:22:00|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:22:25|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:22:37|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:22:53|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:23:03|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:26:18|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:26:29|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:27:47|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:27:49|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:28:00|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:34:05|HY000|1364|Field 'Cookie' doesn't have a default value
+----------------------------------------
+|2018-08-14 16:44:39|HY093||
+----------------------------------------
+|2018-08-14 17:03:39|42000|1064|You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+----------------------------------------
+|2018-08-14 17:04:26|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:04:39|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:06:49|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:09:04|42S22|1054|Unknown column 'Admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:13:12|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:22:02|42S22|1054|Unknown column 'login' in 'where clause'
+----------------------------------------
+|2018-08-14 17:24:40|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:24:50|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 17:45:42|42S22|1054|Unknown column 'alkior' in 'where clause'
+----------------------------------------
+|2018-08-14 17:48:59|42S22|1054|Unknown column 'alkior' in 'where clause'
+----------------------------------------
+|2018-08-14 17:51:02|42S22|1054|Unknown column 'alkior' in 'where clause'
+----------------------------------------
+|2018-08-14 17:52:21|42S22|1054|Unknown column 'admin' in 'where clause'
+----------------------------------------
+|2018-08-14 18:02:53|22001|1406|Data too long for column 'Cookie' at row 1
+----------------------------------------

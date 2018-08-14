@@ -5,6 +5,7 @@ namespace Controllers;
 use Core\Validator;
 use models\UserModel;
 use core\RND;
+use models\ArticleModel;
 use core\Request;
 use core\SQL;
 
@@ -23,10 +24,12 @@ class UserController extends BaseController
 				if ($auth == true) {
             		$_SESSION['auth'] = true;
 
+
 	            	// если стоит галочка                       
 		            if (isset($this->request->getPost()['remember'])) {
+                        $salt = $mUser->setSaltCookie($validator->fields['login']);
 		                setcookie('login', $validator->fields['login'], time()+3600*24*7, '/');
-		                setcookie('password', password_hash($validator->fields['password'], PASSWORD_DEFAULT), time()+3600*24*7, '/');
+		                setcookie('verify', $salt, time()+3600*24*7, '/');
 		            }
 
 					// Проверяем, что есть отметка, откуда мы пришли и перенаправляем туда
@@ -52,7 +55,7 @@ class UserController extends BaseController
 	{
 		unset($_SESSION['auth']);
 	    setcookie('login', '', time() - 1);
-	    setcookie('password', '', time() - 1);
+	    setcookie('verify', '', time() - 1);
 
 	    $this->getRedirect('/');
 	}
@@ -68,7 +71,6 @@ class UserController extends BaseController
 
             $mUser->addUser($validator->fields['login'], $validator->fields['email'], password_hash($validator->fields['password'], PASSWORD_DEFAULT));
             $this->getRedirect('/login');
-
 
         }
         $this->content = RND::render('view/signup.html.php', [

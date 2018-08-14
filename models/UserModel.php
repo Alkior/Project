@@ -39,20 +39,13 @@ class UserModel extends BaseModel
         }
     }
 
-    public function addUser($login, $email, $password) //!!!Костыль, понять почему через SQL не регает.
-    {	/*
-		$object = ['login' => $login, 'email' => $email, 'password' => $password];
-		$res = SQL::Instance();
-		$article = $res->instance($this->table, $object);*/
+    public function addUser($login, $email, $password)
+    {
+
+        $object = ['login' => $login, 'email' => $email, 'password' => $password];
         $res = SQL::Instance();
-        $mask = ['login' => $login, 'email' => $email, 'password' => $password];
-        $query = $res->db->prepare("INSERT INTO {$this->table} (login, email, password) VALUE (:login, :email, :password)");
-        $query->execute($mask);
-        $article = $res->db->lastInsertId();
-
-
-		if(!$query){
-            DBerror::db_error_log($query);
+        $article = $res->insert($this->table, $object);
+        if(!$res){
             return false;
         }
         else{
@@ -97,8 +90,30 @@ class UserModel extends BaseModel
     	return $query->fetch();
     }
 
-    public function getLogin($login)
+    protected function generateSalt()
     {
-        $res = $this->db->query("SELECT * FROM {$this->table} WHERE login = '$login'");
+        $salt = '';
+        $saltLength = 8; //длина соли
+        for($i=0; $i<$saltLength; $i++) {
+            $salt .= md5(chr(mt_rand(33,126))); //символ из ASCII-table
+        }
+        return $salt;
+    }
+
+    public function setSaltCookie($login)
+    {
+        $salt = $this->generateSalt();
+        $object = ['Cookie' => "$salt"];
+        $where = 'login =' . '\''. $login . '\'';
+
+        $res = SQL::Instance();
+        $res->update($this->table, $object, $where);
+
+        if(!$res){
+            return false;
+        }
+        else{
+            return $salt;
+        }
     }
 }
